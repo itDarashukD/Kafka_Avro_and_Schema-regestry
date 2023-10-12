@@ -1,0 +1,32 @@
+{
+  "type": "record",
+  "name": "Event",
+  "namespace": "com.example.event.schema",
+  "fields": [
+    {
+      "name": "eventId",
+      "type": "int",
+      "default": 1
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "default": "all team meeting"
+    },
+    {
+      "name": "place",
+      "type": "string",
+      "default": "MS teams"
+    },
+    {
+      "name": "speaker",
+      "type": [ "null","string" ]
+    },
+    {
+      "name": "eventType",
+      "type": "string",
+      "default": "daily"
+    }
+  ],
+
+}

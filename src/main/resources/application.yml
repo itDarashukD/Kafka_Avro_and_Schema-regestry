@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: event-service
+
+  profiles:
+    active : dev
+
+server:
+  port: 8084
+
+---
+spring:
+  config:
+    activate:
+      on-profile:  dev
+
+
+  kafka:
+    bootstrap-servers: "192.168.99.111:9092"
+
+    producer:
+      keySerializer: "org.apache.kafka.common.serialization.StringSerializer"
+      valueSerializer: "io.confluent.kafka.serializers.KafkaAvroSerializer"
+      properties:
+        schema:
+          registry:
+            url: "http://192.168.99.111:8081"
+
+    consumer:
+      group-id: "spring-boot-avro-consumer-id"
+      keyDeserializer: "org.apache.kafka.common.serialization.StringDeserializer"
+      valueDeserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
+      autoOffsetReset: "earliest"
+      properties:
+        schema:
+          registry:
+            url: "http://192.168.99.111:8081"
+        specific:
+          avro:
+            reader: "true"
+
+
+avro:
+  topic:
+    name: create-event-notification
